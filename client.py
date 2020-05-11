@@ -1,4 +1,7 @@
 import socketio
+from time import perf_counter
+
+t_start = 0
 
 sio = socketio.Client()
 
@@ -6,10 +9,14 @@ sio = socketio.Client()
 def on_message(data):
     if data == "ping":
       sio.emit('send', 'pong')
+    if data == 'pong':
+      print(perf_counter() - t_start)
     print(data)
 
 sio.connect('http://35.223.229.47:80')
 
 while 1:
   msg = input()
+  if msg == 'ping':
+    t_start = perf_counter()
   sio.emit('send', msg)
