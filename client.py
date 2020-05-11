@@ -6,7 +6,7 @@ sio = socketio.Client()
 def on_message(data):
     print(data)
 
-sio.connect('http://http://35.223.229.47:3000')
+sio.connect('http://http://35.223.229.47:80')
 
 while 1:
   msg = input()
