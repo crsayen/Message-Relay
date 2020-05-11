@@ -13,9 +13,13 @@ server.listen(80, () => {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('send', msg =>
+  socket.on('send', msg => {
+    if (msg == 'server') {
+      socket.emit('receive', 'pong')
+      return
+    }
     socket.broadcast.emit('receive', msg)
-  )
+  })
 
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id );
