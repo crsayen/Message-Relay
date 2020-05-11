@@ -4,6 +4,8 @@ sio = socketio.Client()
 
 @sio.on('receive')
 def on_message(data):
+    if data == "ping":
+      sio.emit('send', 'pong')
     print(data)
 
 sio.connect('http://35.223.229.47:80')
