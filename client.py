@@ -10,8 +10,9 @@ def on_message(data):
     if data == "ping":
       sio.emit('send', 'pong')
     if data == 'pong':
-      print(perf_counter() - t_start)
-    print(data)
+      print('took {}ms'.format(int((perf_counter() - t_start) * 1000)))
+    else:
+      print(data)
 
 sio.connect('http://35.223.229.47:80')
 
